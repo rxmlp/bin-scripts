@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+#Get ffsend here
+#https://github.com/timvisee/ffsend/releases/latest
+
 resp=$($HOME/.local/bin/ffsend u -h https://send.adminforge.de "$1" --expiry-time 5m --password)
 
 url=$(printf "$resp" | grep -oP "https://send.adminforge.de\S+")
