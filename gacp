@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+git -C "$HOME/.dotfiles" add .
+git -C "$HOME/.dotfiles" commit -m "$*"
+git -C "$HOME/.dotfiles" push origin main

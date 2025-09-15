@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+set -euo pipefail
+trap 'echo "Error on line $LINENO: command \"$BASH_COMMAND\" failed"; exit 1' ERR
+
+RESET_COLOR="\033[0m"
+TEXT_GREEN="\033[92m"
+TEXT_RED="\033[0;31m"
+cli="$(basename "$0")"
+
+
+if [[ -z "${1:-}" ]]; then
+    echo -e "${TEXT_GREEN}Usage: $cli {in|rm|clr|help}${RESET_COLOR}"
+    exit 1
+fi
+
+
+case "$1" in
+  in)
+    if [[ -z "${2:-}" ]]; then
+      echo -e "${TEXT_RED}Error: package name required for $cli in command${RESET_COLOR}"
+      echo -e "${TEXT_GREEN}Usage: $cli in <package_name>${RESET_COLOR}"
+      exit 1
+    fi
+    echo -e "${TEXT_GREEN}Install package ${2}...${RESET_COLOR}"
+    flatpak install --user "$2"
+    echo -e "${TEXT_GREEN}Package installation complete!!${RESET_COLOR}"
+    ;;
+  rm)
+    if [[ -z "${2:-}" ]]; then
+      echo -e "${TEXT_RED}Error: package name required for $cli rm command${RESET_COLOR}"
+      echo -e "${TEXT_GREEN}Usage: $cli rm <package_name>${RESET_COLOR}"
+      exit 1
+    fi
+    echo -e "${TEXT_GREEN}Remove package ${2}...${RESET_COLOR}"
+    flatpak remove --user "$2"
+    echo -e "${TEXT_GREEN}Package $2 removed!!${RESET_COLOR}"
+    ;;
+  clr)
+    echo -e "${TEXT_GREEN}Cleaning up cache...${RESET_COLOR}"
+    flatpak uninstall --unused --noninteractive
+    echo -e "${TEXT_GREEN}Cache cleaned!!${RESET_COLOR}"
+    ;;
+  help|--help)
+    echo -e "${TEXT_GREEN}Usage: $cli <command> [args]${RESET_COLOR}"
+    echo -e "${TEXT_GREEN}Commands:${RESET_COLOR}"
+    echo -e "  in <pkg>   - Install a Flatpak package for the user (non-interactive)"
+    echo -e "  rm <pkg>   - Remove a Flatpak package for the user (non-interactive)"
+    echo -e "  clr        - Cleanup unused Flatpak runtimes and packages"
+    echo -e "  help       - Show this help message"
+    exit 0
+    ;;
+  *)
+    echo -e "${TEXT_GREEN}Usage: $cli {in|rm|clr|help}${RESET_COLOR}"
+    exit 1
+    ;;
+esac
