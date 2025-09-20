@@ -15,7 +15,7 @@ fi
 
 
 case "$1" in
-  in)
+  i|in)
     if [[ -z "${2:-}" ]]; then
       echo -e "${TEXT_RED}Error: package name required for $cli in command${RESET_COLOR}"
       echo -e "${TEXT_GREEN}Usage: $cli in <package_name>${RESET_COLOR}"
@@ -25,7 +25,7 @@ case "$1" in
     flatpak install --user "$2"
     echo -e "${TEXT_GREEN}Package installation complete!!${RESET_COLOR}"
     ;;
-  rm)
+  r|rm)
     if [[ -z "${2:-}" ]]; then
       echo -e "${TEXT_RED}Error: package name required for $cli rm command${RESET_COLOR}"
       echo -e "${TEXT_GREEN}Usage: $cli rm <package_name>${RESET_COLOR}"
@@ -35,23 +35,23 @@ case "$1" in
     flatpak remove --user "$2"
     echo -e "${TEXT_GREEN}Package $2 removed!!${RESET_COLOR}"
     ;;
-  clr)
+  c|clr)
     echo -e "${TEXT_GREEN}Cleaning up cache...${RESET_COLOR}"
     flatpak uninstall --user --unused --noninteractive
     echo -e "${TEXT_GREEN}Cache cleaned!!${RESET_COLOR}"
     ;;
-  lst)
+  l|lst)
     echo -e "${TEXT_GREEN}Installed packages${RESET_COLOR}"
     flatpak --user list
     ;;
-  help|--help)
+  h|help|--help)
     echo -e "${TEXT_GREEN}Usage: $cli <command> [args]${RESET_COLOR}"
     echo -e "${TEXT_GREEN}Commands:${RESET_COLOR}"
-    echo -e "  in <pkg>   - Install a Flatpak package for the user (non-interactive)"
-    echo -e "  rm <pkg>   - Remove a Flatpak package for the user (non-interactive)"
-    echo -e "  clr        - Cleanup unused Flatpak user runtimes and packages"
-    echo -e "  lst        - Lists installed user packages"
-    echo -e "  help       - Show this help message"
+    echo -e "  i|in <pkg>   - Install a Flatpak package for the user (non-interactive)"
+    echo -e "  r|rm <pkg>   - Remove a Flatpak package for the user (non-interactive)"
+    echo -e "  c|clr        - Cleanup unused Flatpak user runtimes and packages"
+    echo -e "  l|lst        - Lists installed user packages"
+    echo -e "  h|help       - Show this help message"
     exit 0
     ;;
   *)
