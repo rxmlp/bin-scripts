@@ -37,15 +37,20 @@ case "$1" in
     ;;
   clr)
     echo -e "${TEXT_GREEN}Cleaning up cache...${RESET_COLOR}"
-    flatpak uninstall --unused --noninteractive
+    flatpak uninstall --user --unused --noninteractive
     echo -e "${TEXT_GREEN}Cache cleaned!!${RESET_COLOR}"
+    ;;
+  lst)
+    echo -e "${TEXT_GREEN}Installed packages${RESET_COLOR}"
+    flatpak --user list
     ;;
   help|--help)
     echo -e "${TEXT_GREEN}Usage: $cli <command> [args]${RESET_COLOR}"
     echo -e "${TEXT_GREEN}Commands:${RESET_COLOR}"
     echo -e "  in <pkg>   - Install a Flatpak package for the user (non-interactive)"
     echo -e "  rm <pkg>   - Remove a Flatpak package for the user (non-interactive)"
-    echo -e "  clr        - Cleanup unused Flatpak runtimes and packages"
+    echo -e "  clr        - Cleanup unused Flatpak user runtimes and packages"
+    echo -e "  lst        - Lists installed user packages"
     echo -e "  help       - Show this help message"
     exit 0
     ;;
