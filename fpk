@@ -40,7 +40,7 @@ case "$1" in
     flatpak uninstall --user --unused --noninteractive
     echo -e "${TEXT_GREEN}Cache cleaned!!${RESET_COLOR}"
     ;;
-  l|lst)
+  l|ls)
     echo -e "${TEXT_GREEN}Installed packages${RESET_COLOR}"
     flatpak --user list
     ;;
