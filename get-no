@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+no_url=(https://naas.isalman.dev/no)
+
+no_message=$(curl -s "$no_url" | jq -r '.reason')
+
+printf "%s\n" "$no_message"
+
+wl-copy "$no_message"
