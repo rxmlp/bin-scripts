@@ -55,20 +55,12 @@ cursor() {
   gsettings set org.gnome.desktop.interface cursor-theme "catppuccin-mocha-dark-cursors"
 }
 
-cursor_xres() {
-  echo -e "${TEXT_GREEN}Resetting cursor size in ~/.Xresources and reloading...${RESET_COLOR}"
-  rm -f ~/.Xresources
-  echo "Xcursor.size: 18" >> ~/.Xresources
-  xrdb -merge ~/.Xresources
-}
-
 case "${1:-}" in
   lock)       lock ;;
   paper)      paper ;;
   idle)       idle ;;
   polkit)     polkit ;;
   cursor)     cursor ;;
-  cursor-xres) cursor_xres ;;
   help|--help) usage ;;
   *)
     echo -e "${TEXT_RED}Error: Unknown or missing command${RESET_COLOR}"
