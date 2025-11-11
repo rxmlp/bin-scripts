@@ -24,6 +24,8 @@ EOF
 }
 
 lock() {
+  echo -e "${TEXT_GREEN}Allowing session lock restore...${RESET_COLOR}"
+  hyprctl --instance 0 "keyword misc:allow_session_lock_restore 1"
   echo -e "${TEXT_GREEN}Locking screen with hyprlock...${RESET_COLOR}"
   hyprctl --instance 0 "dispatch exec hyprlock"
 }
