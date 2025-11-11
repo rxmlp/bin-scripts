@@ -17,7 +17,6 @@ Commands:
   idle         Restart hypridle idle daemon
   polkit       Restart the hyprpolkitagent polkit authentication agent
   cursor       Set cursor theme to catppuccin-mocha-dark with appropriate sizes
-  cursor-xres  Reset cursor size in ~/.Xresources and reload X resources
   help         Show this help message
 
 EOF
